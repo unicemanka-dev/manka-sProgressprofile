@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manka Liberator | Official Profile</title>
+    <style>
+        /* Base Styles & Variables */
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #c0392b;
+            --accent-color: #e67e22;
+            --light-bg: #f8f9fa;
+            --dark-text: #333;
+            --light-text: #666;
+            --header-font: 'Georgia', 'Times New Roman', serif;
+            --body-font: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--body-font);
+            color: var(--dark-text);
+            line-height: 1.6;
+            background-color: #fff;
+        }
+
+        h1, h2, h3 { font-family: var(--header-font); color: var(--primary-color); }
+        
+        a { text-decoration: none; color: inherit; }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0; width: 100%;
+            background: #fff;
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: 700; font-family: var(--header-font); }
+        .logo span { color: var(--accent-color); }
+        
+        .nav-links a {
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* Section Layouts */
+        section { padding: 6rem 5% 4rem; }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        /* Home Section */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            /* Using a high-quality CSS gradient instead of external Unsplash image */
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,240,240,0.9) 100%), 
+                        linear-gradient(45deg, #2c3e50 0%, #000 100%);
+            background-blend-mode: overlay;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; color: var(--primary-color); }
+        .hero-subtitle { font-size: 1.2rem; margin-bottom: 2rem; color: var(--light-text); font-weight: 300; }
+        
+        .mission-box {
+            background: #fff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            border-left: 5px solid var(--accent-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .mission-box strong { color: var(--primary-color); display: block; margin-bottom: 0.5rem; }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            background: var(--primary-color);
+            color: #fff !important;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin: 0.5rem;
+        }
+        .btn:hover { background: var(--accent-color); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid var(--primary-color); color: var(--primary-color) !important; }
+        .btn-outline:hover { background: var(--primary-color); color: #fff !important; }
+
+        /* Section Headers */
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 3rem; }
+        .section-title::after {
+            content: ''; display: block; width: 60px; height: 3px;
+            background: var(--accent-color); margin: 10px auto 0;
+        }
+
+        /* About Section */
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+        .about-text p { margin-bottom: 1.5rem; text-align: justify; }
+        
+        .stats-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 2rem; }
+        .stat-card {
+            background: var(--light-bg); padding: 1.5rem; border-radius: 8px; text-align: center;
+            border-bottom: 3px solid var(--primary-color);
+        }
+        .stat-card h4 { font-size: 1.8rem; color: var(--accent-color); margin-bottom: 0.5rem; }
+
+        /* Resume Data */
+        .resume-section { margin-top: 2rem; }
+        .resume-section h3 { margin-bottom: 1rem; border-bottom: 1px solid #ddd; padding-bottom: 0.5rem; }
+        .resume-list { list-style: none; margin-bottom: 2rem; }
+        .resume-list li { margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
+        .resume-list li::before { content: '•'; color: var(--accent-color); font-size: 1.5rem; position: absolute; left: 0; top: -5px; }
+        
+        .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .tag { background: var(--light-bg); padding: 0.3rem 0.8rem; border-radius: 20px; font-size: 0.9rem; border: 1px solid #eee; }
+
+        /* Organizations Section */
+        #organizations { background: var(--light-bg); }
+        .org-card {
+            background: #fff; padding: 2.5rem; border-radius: 12px; margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        .org-card h3 { display: flex; align-items: center; gap: 15px; }
+        
+        .grid-8 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+        .arm-item { background: var(--light-bg); padding: 1rem; border-radius: 5px; text-align: center; font-weight: 600; border: 1px solid #eee; }
+        
+        .objective-item { margin-bottom: 1.5rem; }
+        .objective-item h4 { color: var(--primary-color); display: flex; align-items: center; gap: 10px;}
+        .objective-item p { color: var(--light-text); font-size: 0.95rem; margin-top: 0.3rem; padding-left: 2rem;}
+
+        /* Books Section */
+        .books-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .book-card {
+            background: var(--light-bg); padding: 3rem 2rem; border-radius: 10px; text-align: center;
+            border-top: 4px solid var(--accent-color); transition: transform 0.3s;
+        }
+        .book-card:hover { transform: translateY(-10px); background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .book-icon { margin-bottom: 1.5rem; color: var(--primary-color); }
+        .book-title { font-family: var(--header-font); font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem; }
+        .book-subtitle { font-style: italic; color: var(--light-text); }
+
+        /* Contact Section */
+        #contact { background: var(--primary-color); color: #fff; text-align: center; }
+        .section-title.light { color: #fff; }
+        .contact-info { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; margin-top: 3rem; }
+        .contact-item { font-size: 1.1rem; display: flex; align-items: center; gap: 10px; }
+        .contact-item svg { fill: var(--accent-color); }
+        .contact-item a:hover { color: var(--accent-color); text-decoration: underline; }
+        
+        footer { text-align: center; padding: 3rem; background: #1a252f; color: #aaa; border-top: 1px solid #2c3e50; }
+
+        /* Icons (SVG) */
+        .icon-svg { width: 24px; height: 24px; vertical-align: middle; }
+        .icon-lg { width: 48px; height: 48px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .about-grid { grid-template-columns: 1fr; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-btns { display: flex; flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">Manka <span>Liberator</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#organizations">Organizations</a>
+            <a href="#books">Books</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container hero-content">
+            <h1>Manka Liberator</h1>
+            <p class="hero-subtitle">Author • Counselor • Civil Society Worker • Minister of the Gospel</p>
+            
+            <div class="mission-box">
+                <svg class="icon-svg" viewBox="0 0 24 24" style="fill: var(--accent-color); margin-bottom: 10px;"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C14.9124 8 14.017 7.10457 14.017 6V5C14.017 3.34315 15.3602 2 17.017 2H20.017C21.6739 2 23.017 3.34315 23.017 5V15C23.017 18.3137 20.3307 21 17.017 21H14.017ZM1 21L1 18C1 16.8954 1.89543 16 3 16H6C6.55228 16 7 15.5523 7 15V9C7 8.44772 6.55228 8 6 8H3C1.89543 8 1 7.10457 1 6V5C1 3.34315 2.34315 2 4 2H7C8.65685 2 10 3.34315 10 5V15C10 18.3137 7.31371 21 4 21H1Z"/></svg>
+                <strong>Mission Statement:</strong>
+                <p>To Bring Holistic Liberty to especially women, youths, and girls to joyfully serve God and multiply across different sectors.</p>
+            </div>
+            
+            <div class="hero-btns">
+                <a href="#about" class="btn">Read My Story</a>
+                <a href="#organizations" class="btn btn-outline">My Organizations</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>With over 15 years of experience transforming lives, I am a dedicated civil society worker, passionate advocate for holistic well-being, author, and counselor. I have served extensively across schools, churches, and private practices to champion mental health and spiritual growth for women, youth, and children.</p>
+                    <p>As a teacher and preacher of the Gospel, I blend professional expertise with deep compassion to provide a roadmap for healing and resilience. My work is a testament to an unwavering commitment to nurturing the mind and spirit in equal measure.</p>
+                    
+                    <div class="stats-container">
+                        <div class="stat-card">
+                            <h4>3000+</h4>
+                            <p>Students & Pupils Reached</p>
+                        </div>
+                        <div class="stat-card">
+                            <h4>1000+</h4>
+                            <p>Empowered Individuals</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-wrapper">
+                    <div class="resume-section">
+                        <h3>Academic Qualifications</h3>
+                        <ul class="resume-list">
+                            <li><strong>Master's Degree</strong> in Gender and Project Management</li>
+                            <li><strong>BSc</strong> in International Relations</li>
+                            <li><strong>BSc</strong> in Christian Theology</li>
+                            <li><strong>BSc</strong> in Nursing</li>
+                            <li><strong>Dipes 1</strong> in History</li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>Certifications</h3>
+                        <ul class="resume-list">
+                            <li>MHPSS and PFA <em>(Focus Initiative USA)</em></li>
+                            <li>Servant Leadership <em>(Team21)</em></li>
+                            <li>Artificial Intelligence <em>(Ai Unlock)</em></li>
+                        </ul>
+                    </div>
+
+                    <div class="resume-section">
+                        <h3>Skills & Values</h3>
+                        <div class="tags">
+                            <span class="tag">Leadership & Influence</span>
+                            <span class="tag">Vision & Strategy</span>
+                            <span class="tag">Emotional Intelligence</span>
+                            <span class="tag">Problem-Solving</span>
+                            <span class="tag">Storytelling</span>
+                            <span class="tag">MHPSS</span>
+                        </div>
+                        <div class="tags" style="margin-top: 10px;">
+                            <span class="tag" style="background:#e8f4fd; border-color:#b6dcf9;">Integrity</span>
+                            <span class="tag" style="background:#e8f4fd; border-color:#b6dcf9;">Excellence</span>
+                            <span class="tag" style="background:#e8f4fd; border-color:#b6dcf9;">Compassion</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="organizations">
+        <div class="container">
+            <h2 class="section-title">Leadership & Organizations</h2>
+
+            <div class="org-card">
+                <h3>
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="fill: var(--accent-color);"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    SAFE HOME
+                </h3>
+                <p style="margin-top: 10px; color: var(--light-text);">Founder and Executive Director. Safe Home is an organization deeply focused on Mental Health and Psychosocial Support (MHPSS), providing safe spaces and interventions for those in need.</p>
+            </div>
+
+            <div class="org-card">
+                <h3>
+                    <svg class="icon-svg" viewBox="0 0 24 24" style="fill: var(--accent-color);"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    LIBERTY GLOBAL ASSOCIATION
+                </h3>
+                <p style="margin-top: 10px; color: var(--light-text);">Founder and Executive Director. A multifaceted agency comprising 8 dynamic arms designed to deliver holistic empowerment.</p>
+                
+                <div class="grid-8">
+                    <div class="arm-item">Liberty Publishing House</div>
+                    <div class="arm-item">Liberty Tech Innovation</div>
+                    <div class="arm-item">Liberty Consultancy</div>
+                    <div class="arm-item">Liberty Construction</div>
+                    <div class="arm-item">Liberty Travel Agency</div>
+                    <div class="arm-item">Liberty Wellness</div>
+                    <div class="arm-item">Liberty Partnership Venture</div>
+                    <div class="arm-item">Liberty Outreach</div>
+                </div>
+
+                <div class="objectives-list">
+                    <h4 style="margin: 2.5rem 0 1.5rem; border-bottom: 2px solid var(--accent-color); display: inline-block; padding-bottom: 5px;">5 Strategic Objectives</h4>
+                    
+                    <div class="objective-item">
+                        <h4>✓ 1. Integrated Empowerment Across Sectors</h4>
+                        <p>Providing holistic solutions that empower individuals and organizations through knowledge and innovation.</p>
+                    </div>
+                    <div class="objective-item">
+                        <h4>✓ 2. Capacity Building & Human Development</h4>
+                        <p>Equipping people with the skills, tools, and mindset needed to thrive through mentorship.</p>
+                    </div>
+                    <div class="objective-item">
+                        <h4>✓ 3. Sustainable Enterprise Growth</h4>
+                        <p>Fostering the creation of sustainable businesses that drive social transformation.</p>
+                    </div>
+                    <div class="objective-item">
+                        <h4>✓ 4. Global Connectivity</h4>
+                        <p>Building bridges between people and resources through collaborative networks worldwide.</p>
+                    </div>
+                    <div class="objective-item">
+                        <h4>✓ 5. Community Impact</h4>
+                        <p>Uplifting communities through outreach and wellness programs that improve lives.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="books">
+        <div class="container">
+            <h2 class="section-title">Latest Publications</h2>
+            <div class="books-grid">
+                <div class="book-card">
+                    <div class="book-icon">
+                        <svg class="icon-svg icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 11.55C9.64 9.35 6.48 8 3 8v11c3.48 0 6.64 1.35 9 3.55 2.36-2.2 5.52-3.55 9-3.55V8c-3.48 0-6.64 1.35-9 3.55zM12 8c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3z"/></svg>
+                    </div>
+                    <div class="book-title">FROM THE BATTLEFIELD TO THE WELL WITHIN</div>
+                    <div class="book-subtitle">"For the man who has been strong for too long"</div>
+                </div>
+                
+                <div class="book-card">
+                    <div class="book-icon">
+                        <svg class="icon-svg icon-lg" viewBox="0 0 24 24" fill="currentColor"><path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.1-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm0 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-3.45.3-5 1V7c1.55-.7 3.3-1 5-1 1.2 0 2.4.15 3.5.5v11z"/></svg>
+                    </div>
+                    <div class="book-title">FROM THE THRESHING FLOOR TO THE WELL WITHIN</div>
+                    <div class="book-subtitle">"For the weary woman of God"</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title light">Get In Touch</h2>
+            <p style="font-size: 1.1rem; max-width: 600px; margin: 0 auto; opacity: 0.9;">Whether you are seeking counseling, organizational partnership, or inviting me to speak, I would love to connect with you.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+                    <a href="https://wa.me/237673202653" target="_blank">+237 673 202 653</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                    <a href="mailto:unicemanka1@gmail.com">unicemanka1@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <svg class="icon-svg" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                    <a href="https://www.linkedin.com/in/manka-unice-liberator-1212601a4" target="_blank">LinkedIn Profile</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Manka Liberator. All Rights Reserved.</p>
+            <p style="font-size: 0.8rem; margin-top: 10px;">Holistic Liberty • Empowerment • Transformation</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 70, // Offset for sticky nav
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Simple Fade-in effect on scroll
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = "1";
+                    entry.target.style.transform = "translateY(0)";
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = "0";
+            section.style.transform = "translateY(20px)";
+            section.style.transition = "all 0.8s ease-out";
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
